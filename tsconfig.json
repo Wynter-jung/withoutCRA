@@ -1,0 +1,26 @@
+{
+  "compilerOptions": {
+    "target": "es5",
+    "module": "commonjs",
+    "lib": ["dom", "dom.iterable", "esnext"],  // 컴파일에 포함될 라이브러리 파일 목록
+      // target 옵션 값에 따라 기본으로 포함되는 라이브러리가 있다.
+      // lib 옵션 설정시 그 라이브러리 파일만 포함된다.
+    "alwaysStrict": true, //자바스크립트 "use strict" 모드 켜기
+    "strictNullChecks": true, // null , undefined 타입에 이상한 조작하면 에러 띄움
+    "allowJs": true, // js 파일들을 ts 파일에서 import 해서 쓸 수 있는지
+    "checkJs": true, // 일반 js 파일에서도 에러체크 여부 
+    "jsx": "react", // tsx 파일을 jsx로 어떻게 컴파일할 것인지 'preserve', 'react-native', 'react'
+    "declaration": true, //컴파일시 .d.ts 파일도 자동으로 함께생성 (현재쓰는 모든 타입이 정의된 파일)
+    "strict": true, //strict 관련 모드 전부 켜기
+    "isolatedModules": true, // 각 파일을 분리된 모듈로 트랜스파일
+    "moduleResolution": "node", // 모듈 해석 방법
+    "forceConsistentCasingInFileNames": true, // 파일명에 대소문자 구분하지 않아도 되는 기능 사용 여부
+    "baseUrl": "./",
+    "paths": {
+      "@components/*": ["components/*"],
+      "@pages/*": ["pages/*"]
+    },
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
+  }
+}

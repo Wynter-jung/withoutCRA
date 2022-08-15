@@ -1,0 +1,67 @@
+const webpack = require('webpack');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+
+const port = process.env.PORT || 3000;
+
+module.exports = {
+	entry:'./src/index.tsx',
+	output:{
+	      path: __dirname + '/dist',
+	      filename: 'bundle.[chunkhash].js' // 어플리케이션이 수정되어 다시 컴파일 될 때마다 웹팩에서 생성된 해시로 변경해 캐싱에 도움이 된다
+	},
+	mode: 'development',
+  module : {
+        rules: [
+          {
+            test: /\.(ts|tsx|js|jsx)$/,
+            use: "babel-loader",
+            exclude: /node_modules/,
+          },
+          {
+                test: /\.scss$/,
+                use: [
+                  "style-loader", // creates style nodes from JS strings
+                  "css-loader", // translates CSS into CommonJS
+                  "sass-loader" // compiles Sass to CSS, using Node Sass by default
+                ],
+                exclude: /node_modules/
+            },
+            {
+                test: /\.(png|jpe?g|gif)$/,
+                use: [
+                  {
+                    loader: "file-loader",
+                  },
+                ],
+            },
+        ]
+    },
+
+    plugins: [
+        new HtmlWebpackPlugin({  //HtmlWebpackPlugin -> html파일이나 favicon을 번들링과정에 포함 / 번들된 파일을 index.html에 자동 삽입 해줌
+            // 문서 타이틀
+            template: 'public/index.html',
+            // 문서 메타
+            meta: {
+                'theme-color': '#4285f4',
+                'description': 'without cra',
+            },
+          }),
+    ],
+    
+    resolve: {
+        extensions: ['.js', '.jsx', '.tsx' , '.ts' , '.json'], // import 할 때 확장자 입력 안할 수 있음
+    },
+
+    devServer: {
+        host: 'localhost',
+        port: port,
+        hot: true, // 서버 실행했을 때 자동으로 브라우저 열어주는
+        historyApiFallback: true // 브라우저에서 url을 변경할 수 있도록 도와주는 옵션
+    }
+};
+
+/*
+    /src/App.js
+    import { mainWrapper } from 'App.css`
+ */
